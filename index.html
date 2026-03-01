@@ -473,11 +473,13 @@
 
     // Worm movement – per frame, in units of CELL_SIZE
     const BASE_SPEED_PER_CELL = 0.04;          // base speed (no green)
-    const SPEED_PER_GREEN_PER_CELL = 0.015;    // extra speed per green segment
+    const SPEED_PER_GREEN_PER_CELL = 0.025;    // extra speed per green segment
 
     // NEW: small negative speed modifier per segment
     // Each segment slows the worm a bit; for very long worms, total penalty can outweigh green boosts.
-    const SPEED_LENGTH_PENALTY_PER_SEGMENT = 0.0012;
+    const SPEED_LENGTH_PENALTY_PER_SEGMENT = 0.0004;
+	
+	const GREEN_SPEED_DIVISOR = 0.2;
 
     // NEW: minimum speed so worms never fully freeze
     const MIN_SPEED_PER_CELL = 0.005;
@@ -747,29 +749,34 @@
         this.angle = (initialAngle !== null) ? initialAngle : (Math.random() * Math.PI * 2);
         this.angleLockFrames = lockFrames;
 
-                let countR = 0, countG = 0, countB = 0;
-        for (const c of segmentColors) {
-          if (c === "R") countR++;
-          else if (c === "G") countG++;
-          else if (c === "B") countB++;
-          // "N" has NO effect on behaviour except via length penalty
-        }
+      let countR = 0, countG = 0, countB = 0;
+for (const c of segmentColors) {
+  if (c === "R") countR++;
+  else if (c === "G") countG++;
+  else if (c === "B") countB++;
+  // "N" has NO direct effect except via length penalty
+}
 
-        // --- NEW: length-based speed penalty ---
-        const totalSegments = segmentColors.length;
-        const lengthPenaltyPerCell = totalSegments * SPEED_LENGTH_PENALTY_PER_SEGMENT;
+// --- length-based speed penalty (all segments cost something) ---
+const totalSegments = segmentColors.length;
+const lengthPenaltyPerCell = totalSegments * SPEED_LENGTH_PENALTY_PER_SEGMENT;
 
-        let speedPerCell =
-          BASE_SPEED_PER_CELL +
-          countG * SPEED_PER_GREEN_PER_CELL -
-          lengthPenaltyPerCell;
 
-        // Don't let worms completely stall
-        if (speedPerCell < MIN_SPEED_PER_CELL) {
-          speedPerCell = MIN_SPEED_PER_CELL;
-        }
+const greenFactor = countG / (1 + GREEN_SPEED_DIVISOR * countG);
+const greenBoostPerCell = SPEED_PER_GREEN_PER_CELL * greenFactor;
 
-        this.speed = CELL_SIZE * speedPerCell;
+// Combine everything
+let speedPerCell =
+  BASE_SPEED_PER_CELL +
+  greenBoostPerCell -
+  lengthPenaltyPerCell;
+
+// Clamp so worms never fully stall
+if (speedPerCell < MIN_SPEED_PER_CELL) {
+  speedPerCell = MIN_SPEED_PER_CELL;
+}
+
+this.speed = CELL_SIZE * speedPerCell;
         this.lifeSpan = BASE_LIFESPAN_FRAMES + countR * LIFESPAN_PER_RED_FRAMES;
         this.age = 0;
 
@@ -1360,5 +1367,4 @@ let scoreVisible = true;
     window.addEventListener("load", init);
   </script>
 </body>
-
 </html>
