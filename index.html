@@ -10,17 +10,17 @@
     :root {
       color-scheme: dark;
 
-      /* === Core color definitions for UI (traits, buttons) === */
+
       --color-red:   #e00045;
       --color-green: #ffbc30;
       --color-blue:  #07cbaf;
 
-      /* UI text tints */
+
       --ui-red-light:   #e00045;
       --ui-green-light: #ffbc30;
       --ui-blue-light:  #07cbaf;
 
-      /* Worm stroke/fill colors */
+ 
       --worm-red-stroke:   #e00045;
       --worm-red-fill:     #ffffff;
       --worm-green-stroke: #ffbc30;
@@ -28,11 +28,11 @@
       --worm-blue-stroke:  #07cbaf;
       --worm-blue-fill:    #ffffff;
 
-      /* Neutral worm part (no trait effect) */
+  
       --worm-neutral-stroke: #cccccc;
       --worm-neutral-fill:   #ffffff;
 
-      /* Grass color (single level) */
+  
       --grass-main: #007b32;
     }
 
@@ -55,7 +55,7 @@
       box-sizing: border-box;
     }
 
-    /* Canvas + score column */
+ 
     #canvasColumn {
       display: flex;
       flex-direction: column;
@@ -72,9 +72,9 @@
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  margin-top: 12px;
+  margin-top: 6px;
   margin-bottom: 8px;
-  gap: 6px;                          /* Optional but works fine */
+  gap: 6px;                      
 }
 #resetBtn,
     #pauseBtn{
@@ -98,24 +98,47 @@
   cursor: pointer;
 }
 
+#helpBtn {
+   
+	  display: block;
+		margin: 0 auto;
+	margin-top:6px;
+	margin-bottom:8px;
+	   
+  padding: 3px 10px; 
+  font-size: 12px;
+  border-radius: 2px;
+  border: 1px dotted #555;
+  background: #181818;
+  color: #aaa;
+  cursor: pointer;
+
+}
+
+#helpBtn:hover {
+  background: #007b32;
+  color:#fff;
+}
+
+
 #pauseBtn:hover,
 #resetBtn:hover,
 #toggleScoreBtn:hover {
   background: #007b32;
 }
 
-    /* Sidebar / control panel */
+
     #sidebar {
-      width: 260px;
+      width: 280px;
       background: radial-gradient(circle at top, #222 0, #121212 55%, #050505 100%);
-      border-radius: 4px;
+      border-radius: 2px;
       padding: 10px 12px;
       box-shadow: 0 0 18px rgba(0,0,0,0.7);
       box-sizing: border-box;
       font-size: 13px;
       border: 1px solid #333;
 
-      /* Same height as game area (600px) */
+    
       height: 592px;
       display: flex;
       flex-direction: column;
@@ -168,7 +191,9 @@
     }
 
     #eraseBtn {
+	  vertical-align: middle;
       margin-top: 4px;
+	  margin-bottom: 2px;
       padding: 4px 8px;
       font-size: 12px;
       border-radius: 2px;
@@ -216,24 +241,24 @@
 
     #note {
       margin-top: 6px;
-      font-size: 11px;
-      color: #aaa;
-      line-height: 1.4;
+      font-size: 12px;
+      color: #ddd;
+      line-height: 2;
     }
 
     #note2 {
       margin-top: 6px;
       font-size: 11px;
-      color: #aaa;
+      color: #ccc;
       line-height: 1.4;
       letter-spacing:1.5px;
     }
-    /* Colored labels in note2 */
+ 
     #note2 .trait-red   { color: var(--ui-red-light); }
     #note2 .trait-green { color: var(--ui-green-light); }
     #note2 .trait-blue  { color: var(--ui-blue-light); }
 
-    /* SPECIES: name input + list */
+
     .small-label {
       margin-top: 6px;
       display: block;
@@ -287,7 +312,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* SPECIES LIST genome circles */
+
     .species-circle {
       width: 10px;
       height: 10px;
@@ -301,22 +326,26 @@
     .species-circle.B { background: var(--color-blue); }
     .species-circle.N { background: #e0e0e0; }
 	
-	#helpPanel {
+#helpPanel {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 850px;
+  width: 600px;
   max-width: 90vw;
   transform: translate(-50%, -50%);
-  background: rgba(20,20,20,0.95);
+  background: rgba(20,20,20,0.97);
   border: 2px solid #444;
   padding: 16px;
   z-index: 9999;
-  border-radius: 6px;
+  border-radius: 2px;
   box-shadow: 0 0 20px rgba(0,0,0,0.7);
   color: #eee;
   font-size: 14px;
-  display: none; /* hidden by default */
+  display: none;
+
+
+  height: 500px;      
+  overflow-y: auto;   
 }
 
 #helpPanel h2 {
@@ -335,6 +364,7 @@
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  letter-spacing:2px;
 }
 #closeHelpBtn:hover {
   background: #333;
@@ -345,10 +375,10 @@
 <body>
   <div id="app">
     <div id="canvasColumn">
-      <!-- Canvas: slightly shorter for Chromebook screens -->
+    
       <canvas id="game" width="960" height="592"></canvas>
 
-      <!-- Pause / Reset buttons under the game area -->
+ 
 
     </div>
 
@@ -356,13 +386,13 @@
       <div>
         <h1><center>Välkommen till larv-labb</center></h1>
     
-        <h2>1. Skapa en larv</h2>
-        <p>Klicka på färgcirklarna för att skapa:</p>
+        <h2>Skapa en larv</h2>
+        <div id="note"><p>Klicka på färgcirklarna för att skapa en larv och klicka sedan in den i "naturen" till vänster.</p></div>
         <div class="color-buttons">
           <button class="color-btn red"     data-color="R" title="Liv"></button>
           <button class="color-btn green"   data-color="G" title="Hastighet"></button>
           <button class="color-btn blue"    data-color="B" title="Syn"></button>
-          <!-- Neutral segment -->
+        
           <button class="color-btn neutral" data-color="N" title="Neutral (påverkar inte egenskaper)"></button>
           <button id="eraseBtn" type="button">Sudda ✖</button>
         </div>
@@ -379,13 +409,9 @@
          
         </div>
       
-        <h2>2. Sätt in din larv i naturen </h2>
+   
+		  <button id="helpBtn">Klicka här för utförligare instruktioner</button>
 
-          <p>Klicka för att sätta in din larv.</b></p>
-		          <div id="note">      
-		  <p>Tryck <b>"H"</b> för utökad hjälp.</p>
-
-</div>
 
       <div id="gameControls">
 	   <button id="pauseBtn" type="button">Pausa ⏸</button>
@@ -418,7 +444,7 @@
    
 </div>
 
-        <!-- SPECIES: list under the instructions menu -->
+
         <h2>Arter i spelet</h2>
       </div>
 
@@ -433,81 +459,72 @@
             Välkommen till Larv-labb! Du kan hantera larv-labb som ett spel eller strunta i poängen och bara bedriva forskning på dessa virtuella larver.    </p>
                
 <p>			   
-			   Larver äter gräs (de gröna rutorna). Varje gräsruta fyller en "larvdel". När alla cirklar i larven är fyllda får den barn och kan fortsätta äta tills dess att den dör.
+			Larv-labb är ett litet <span style="color: #11c259;">virtuellt ekosystem</span>. Du kan starta eller stoppa simuleringen när som helst med <b>start</b> och <b>pause</b>. Larver äter gräs (de <span style="color: #11c259;">gröna</span> cellerna). Varje gräscell fyller en "larvdel". När alla cirklar i larven är fyllda får den barn och kan fortsätta äta tills dess att den dör. Den kan få fler barn om den hinner.
       </p>
 			   
           <b>Färger ger larverna egenskaper:</b><br />
 		   <div id="note2">
           <span class="trait-red"><b>&nbsp&nbsp Röda delar</b></span> → ökar larvens livslängd<br />
           <span class="trait-green"><b>&nbsp&nbsp Oranga delar</b></span> → ökar larvens hastighet<br />
-          <span class="trait-blue"><b>&nbsp&nbsp Turkosa delar</b></span> → förbättrar larvens syn. Den både utökar vinkel och synavstånd.<br />
-          <span><b>&nbsp&nbsp Gråa delar</b></span> är neutrala och påverkar inte larven utöver det att den måste äta mer. <br />
+          <span class="trait-blue"><b>&nbsp&nbsp Turkosa delar</b></span> → förbättrar larvens syn. Den både utökar vinkel och synavstånd.<br /><br />
+          <span><b><span style="color: #ccc;">Gråa delar</b></span> är neutrala och påverkar inte larven utöver det att den måste äta mer. Dessa kan t.ex. användas som kontrollgrupp vid experiment.  <br />
         </div>
        <br />
           <h2>Poäng</h2>
-          Du får x² poäng per sekund där x är antalet larvarter (inte individer) som lever i ditt spel. Det betyder att en art ger 1²=1 poäng per sekund. Två arter ger 2²=4. Tre arter ger 3²=9... och så vidare. <br /><br />
-          <b>Men</b> att skapa en ny larv <b>halverar</b> din poäng. Det betyder att för att få så många poäng som möjligt så vill du fort försöka skapa ett stabilt ekosystem med biologisk mångfald, som klarar sig utan inblandning.
-     
-	   <br /><br /><h2>Mutationer</h2>
-          Att aktivera mutationer <b>slår av poängräkningen</b> tills dess att du trycker "Reset" och startar om spelet eller uppdaterar sidan.
-		  Mutationer är därmed för dig som är mer intresserad av experiment än poäng. Mutationsgraden anges i procent i decimalform där 1.0 = 100%. 
-		  Ett värde på t.ex 0.01 (alltså 1%) innebär att larvernas barn har 1 procents chans att switcha färg på en av sina delar, utöka med en del, eller tappa en del.
-			
+          <p>Du får <b>x²</b> poäng per sekund där <b>x är antalet larvarter</b> (inte individer) som lever i ditt spel. Det betyder att en art ger 1²=1 poäng per sekund. Två arter ger 2²=4. Tre arter ger 3²=9... och så vidare. </p>
+          <p> <span style="color: red;">Men</span> att skapa en ny larv  <span style="color: red;">halverar</span> din poäng. Det betyder att för att få så många poäng som möjligt så vill du fort försöka skapa ett stabilt ekosystem med biologisk mångfald, som klarar sig utan inblandning. 
+		  <p>Om du inte är intresserad av poäng så kan du gömma dem genom att klicka "<b>Dölj poäng</b>".</p>
+       <br />
+	   <h2>Mutationer</h2>
+	   <p>Mutationer gör att evolution kan ske i ditt ekosystem. Mutationer kan sker i larvernas barn. Mutationsgraden anges i procent i decimalform där 1.0 = 100%.  Ett värde på t.ex 0.01 (alltså 1%) innebär att larvernas barn har 1 procents chans att antingen: 
+	   <ul>
+  <li>switcha färg på en av sina delar</li>
+  <li>utöka med en slumpad del</li>
+  <li>eller tappa en slumpad del</li>
+</ul>
+	   
+	   
+	  </p>
+          <p>Att aktivera mutationer <span style="color: red;">slår av poängräkningen</span> tills dess att du trycker "Reset" och startar om spelet eller uppdaterar sidan. Mutationer är därmed för dig som är mer intresserad av experiment än poäng. </p>
+		  
+<br />		
+<p align="center" style="color: #ccc;"><i> Hör av dig till Tommie om du hittar buggar eller har idéer.</i></p>
+		
 	  
   <button id="closeHelpBtn">Göm Instruktionerna igen</button>
 </div>
 
   <script>
-    // ============================================================
-    //  TWEAKABLE CONSTANTS
-    // ============================================================
 
-    // Grid / pixels
-    const CELL_SIZE = 16;              // Size of each grid pixel in canvas units (bigger = fewer cells)
-
-    // Food / grass respawn (fraction of cells changed per frame)
-    const FOOD_RESPAWN_RATE = 0.00025;  // Try 0.001–0.01 for slower/faster dynamics
-	
-    // Initial grass probability (independent per cell)
+    const CELL_SIZE = 16;  
+  
+    const FOOD_RESPAWN_RATE = 0.00025;  
+	  
     const INITIAL_GRASS_PROB = 0.05;
+ 
+    const BASE_SPEED_PER_CELL = 0.04;         
+    const SPEED_PER_GREEN_PER_CELL = 0.025;  
 
-    // Worm movement – per frame, in units of CELL_SIZE
-    const BASE_SPEED_PER_CELL = 0.04;          // base speed (no green)
-    const SPEED_PER_GREEN_PER_CELL = 0.025;    // extra speed per green segment
-
-    // NEW: small negative speed modifier per segment
-    // Each segment slows the worm a bit; for very long worms, total penalty can outweigh green boosts.
     const SPEED_LENGTH_PENALTY_PER_SEGMENT = 0.0002;
-	
 	const GREEN_SPEED_DIVISOR = 0.2;
-
-    // NEW: minimum speed so worms never fully freeze
+  
     const MIN_SPEED_PER_CELL = 0.005;
 
-    // Worm lifespan – in frames
-    const BASE_LIFESPAN_FRAMES = 300;         // base life (no red)
-    const LIFESPAN_PER_RED_FRAMES = 150;      // extra life per red segment
+    const BASE_LIFESPAN_FRAMES = 300;        
+    const LIFESPAN_PER_RED_FRAMES = 150;     
 
-    // Worm vision – in grid cells
     const BASE_VISION_CELLS = 1;              
     const VISION_PER_BLUE_CELLS = 2;        
 	
-	const BASE_VISION_ANGLE = 0.3;              
-	const VISION_ANGLE_PER_BLUE = Math.PI / 6; // 30° per blue segment
+	const BASE_VISION_ANGLE = 0.4;              
+	const VISION_ANGLE_PER_BLUE = Math.PI / 14; 
     
-    // Nutrient deposition (0 = OFF, 1 = ON)
     const ENABLE_NUTRIENTS = 1;
 
-    // Chance (0–1) that each segment drops grass on death
     const NUTRIENT_DEPOSIT_PROB = 0.1;
 
-    // Chance to also fertilize / recolor a random nearby cell
-    const NUTRIENT_RECOLOR_PROB = 1; // tweak 0–1 as you like
+    const NUTRIENT_RECOLOR_PROB = 1; 
     
-
-    // ============================================================
-    //  Basic setup
-    // ============================================================
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
 
@@ -516,12 +533,10 @@
 
     let gridWidth = Math.floor(CANVAS_WIDTH / CELL_SIZE);
     let gridHeight = Math.floor(CANVAS_HEIGHT / CELL_SIZE);
-
-    // Grass presence
+   
     const GRASS_NONE = 0;
     const GRASS_YES  = 1;
 
-    // === Read CSS root variables as JS color constants ===
     const rootStyles = getComputedStyle(document.documentElement);
 
     const GRASS_COLOR = (rootStyles.getPropertyValue('--grass-main') || '#0f6610').trim();
@@ -538,19 +553,14 @@
     let grid = [];
     const worms = [];
 
-    // Score
-    let score = 0;                  // integer score
+    let score = 0;                 
     let lastTimestamp = null;
-    let scoreTimeAccumulator = 0;   // controls "once per second" ticks
+    let scoreTimeAccumulator = 0;   
 
-    // Mutation controls (defaults)
     let mutationEnabled = false;
     let mutationRate = 0.01;
-    // Once mutation has EVER been enabled in this session,
-    // scoring is permanently disabled until reset.
     let hasMutationEverBeenEnabled = false;
 
-    // Pause state (start paused)
     let isPaused = true;
     const pauseBtn = document.getElementById("pauseBtn");
     const resetBtn = document.getElementById("resetBtn");
@@ -561,14 +571,11 @@
       pauseBtn.textContent = isPaused ? "Start ▶" : "Pause ⏸";
     });
 
-    // ============================================================
-    //  UI: Worm builder panel
-    // ============================================================
+
     const previewEl = document.getElementById("preview");
     const eraseBtn = document.getElementById("eraseBtn");
     const colorButtons = document.querySelectorAll(".color-btn");
 
-    // SPECIES: UI references for name + list
     const speciesNameInput = document.getElementById("speciesNameInput");
     const speciesListEl = document.getElementById("speciesList");
 
@@ -579,7 +586,6 @@
       mutationEnabled = mutationEnabledCheckbox.checked;
 
       if (mutationEnabled) {
-        // From now on, this session is "tainted" and cannot gain score
         hasMutationEverBeenEnabled = true;
         score = 0;
         scoreTimeAccumulator = 0;
@@ -593,19 +599,17 @@
       }
     });
 
-    // SPECIES: registry of species by genome key (e.g. "R2G1B0N1")
-    const speciesMap = new Map(); // key: typeKey, value: { typeKey, genome, name, aliveCount, everAlive }
 
-    // Remember creation order
+    const speciesMap = new Map(); 
+
     let speciesCreationCounter = 0;
 
-    // Auto-name counter for unnamed species ("Art 1", "Art 2", ...)
     let speciesNameCounter = 1;
     function generateDefaultSpeciesName() {
       return `Art ${speciesNameCounter++}`;
     }
 
-    let currentGenome = [];  // array of "R", "G", "B", "N"
+    let currentGenome = [];  
 
     function updatePreview() {
       previewEl.innerHTML = "";
@@ -637,7 +641,7 @@
       updatePreview();
     });
 
-    updatePreview(); // initial
+    updatePreview(); 
 	
     function getCompositionKey(segmentColors) {
       let r = 0, g = 0, b = 0, n = 0;
@@ -647,12 +651,10 @@
         else if (c === "B") b++;
         else if (c === "N") n++;
       }
-      return `R${r}G${g}B${b}N${n}`;  // e.g. "R2G1B0N3"
+      return `R${r}G${g}B${b}N${n}`; 
     }
 
-    // ============================================================
-    //  Grid / background (grass)
-    // ============================================================
+
     function randomGrassPresence() {
       return Math.random() < INITIAL_GRASS_PROB ? GRASS_YES : GRASS_NONE;
     }
@@ -696,9 +698,7 @@
       }
     }
 
-    // ============================================================
-    //  Mutation helper
-    // ============================================================
+
     function mutateGenome(genome) {
       const newGenome = genome.slice();
       const colors = ["R", "G", "B", "N"];
@@ -731,9 +731,7 @@
       return newGenome;
     }
 
-    // ============================================================
-    //  Worm logic
-    // ============================================================
+
     class Worm {
       constructor(x, y, segmentColors, initialAngle = null, lockFrames = 0) {
         this.segmentColors = segmentColors.slice();
@@ -754,10 +752,10 @@ for (const c of segmentColors) {
   if (c === "R") countR++;
   else if (c === "G") countG++;
   else if (c === "B") countB++;
-  // "N" has NO direct effect except via length penalty
+ 
 }
 
-// --- length-based speed penalty (all segments cost something) ---
+
 const totalSegments = segmentColors.length;
 const lengthPenaltyPerCell = totalSegments * SPEED_LENGTH_PENALTY_PER_SEGMENT;
 
@@ -765,13 +763,13 @@ const lengthPenaltyPerCell = totalSegments * SPEED_LENGTH_PENALTY_PER_SEGMENT;
 const greenFactor = countG / (1 + GREEN_SPEED_DIVISOR * countG);
 const greenBoostPerCell = SPEED_PER_GREEN_PER_CELL * greenFactor;
 
-// Combine everything
+
 let speedPerCell =
   BASE_SPEED_PER_CELL +
   greenBoostPerCell -
   lengthPenaltyPerCell;
 
-// Clamp so worms never fully stall
+
 if (speedPerCell < MIN_SPEED_PER_CELL) {
   speedPerCell = MIN_SPEED_PER_CELL;
 }
@@ -1063,9 +1061,7 @@ this.speed = CELL_SIZE * speedPerCell;
       }
     }
 
-    // ============================================================
-    //  SPECIES: helpers for registry + list
-    // ============================================================
+
     function ensureSpeciesRegistered(genomeArray, providedName = null) {
       const compKey = getCompositionKey(genomeArray);
 
@@ -1153,9 +1149,7 @@ this.speed = CELL_SIZE * speedPerCell;
       }
     }
 
-    // ============================================================
-    //  Spawn worms (uses species registry)
-    // ============================================================
+
     function spawnWormAt(x, y) {
       if (currentGenome.length === 0) return;
 
@@ -1166,7 +1160,7 @@ this.speed = CELL_SIZE * speedPerCell;
 
       worms.push(new Worm(x, y, currentGenome));
 
-      // Spawning penalty: lose 50% of current score (even if score is 0, it's fine)
+
       score = Math.max(0, Math.floor(score * 0.5));
 
       currentGenome = [];
@@ -1174,9 +1168,7 @@ this.speed = CELL_SIZE * speedPerCell;
       speciesNameInput.value = "";
     }
 
-    // ============================================================
-    //  Main loop
-    // ============================================================
+
     function update(dt) {
       randomizeGridCells();
       for (const worm of worms) {
@@ -1204,7 +1196,7 @@ this.speed = CELL_SIZE * speedPerCell;
       }
       const distinctTypes = typeSet.size;
 
-      // Scoring: permanently disabled if mutation has ever been enabled
+
       if (!hasMutationEverBeenEnabled) {
         scoreTimeAccumulator += dt;
         if (scoreTimeAccumulator >= 1) {
@@ -1220,7 +1212,7 @@ this.speed = CELL_SIZE * speedPerCell;
 let scoreVisible = true;
 
     function drawScore() {
-	  if (!scoreVisible) return;  // NEW: skip drawing
+	  if (!scoreVisible) return;  
 
 	  const text = String(score);
 
@@ -1271,39 +1263,31 @@ let scoreVisible = true;
       requestAnimationFrame(loop);
     }
 
-    // ============================================================
-    //  Reset game
-    // ============================================================
+
     function resetGame() {
-      // Pause
+ 
       isPaused = true;
       pauseBtn.textContent = "Start ▶";
 
-      // Reset score & timing
       score = 0;
       scoreTimeAccumulator = 0;
       lastTimestamp = null;
 
-      // Reset mutation state
       mutationEnabled = false;
       hasMutationEverBeenEnabled = false;
       mutationRate = 0.01;
       mutationEnabledCheckbox.checked = false;
       mutationRateInput.value = "0.01";
 
-      // Clear worms
       worms.length = 0;
 
-      // Reset grid
       initGrid();
 
-      // Reset species registry
       speciesMap.clear();
       speciesCreationCounter = 0;
       speciesNameCounter = 1;
       renderSpeciesList();
 
-      // Reset builder
       currentGenome = [];
       updatePreview();
       speciesNameInput.value = "";
@@ -1311,9 +1295,7 @@ let scoreVisible = true;
 
     resetBtn.addEventListener("click", resetGame);
 
-    // ============================================================
-    //  Input
-    // ============================================================
+
     canvas.addEventListener("click", (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -1340,9 +1322,12 @@ let scoreVisible = true;
 		});
 	
 
+	
+
 	closeHelpBtn.addEventListener("click", () => {
 	  helpPanel.style.display = "none";
 	});
+	
 
 	window.addEventListener("keydown", (e) => {
 	  const active = document.activeElement;
@@ -1354,10 +1339,11 @@ let scoreVisible = true;
 		toggleHelp();
 	  }
 	});
+	
+	document.getElementById("helpBtn").addEventListener("click", () => {
+	  toggleHelp();
+	});
 
-    // ============================================================
-    //  Init
-    // ============================================================
     function init() {
       initGrid();
       renderSpeciesList();
@@ -1368,4 +1354,3 @@ let scoreVisible = true;
   </script>
 </body>
 </html>
-
