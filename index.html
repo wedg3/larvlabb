@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 
   <meta charset="UTF-8" />
   <title>🐛 Larv-labb 🐛</title>
@@ -10,23 +9,23 @@
     :root {
       color-scheme: dark;
 
-      --color-red:   #e00045;
+      --color-red: #e00045;
       --color-green: #ffbc30;
-      --color-blue:  #07cbaf;
+      --color-blue: #07cbaf;
 
-      --ui-red-light:   #e00045;
+      --ui-red-light: #e00045;
       --ui-green-light: #ffbc30;
-      --ui-blue-light:  #07cbaf;
+      --ui-blue-light: #07cbaf;
 
-      --worm-red-stroke:   #e00045;
-      --worm-red-fill:     #ffffff;
+      --worm-red-stroke: #e00045;
+      --worm-red-fill: #ffffff;
       --worm-green-stroke: #ffbc30;
-      --worm-green-fill:   #ffffff;
-      --worm-blue-stroke:  #07cbaf;
-      --worm-blue-fill:    #ffffff;
+      --worm-green-fill: #ffffff;
+      --worm-blue-stroke: #07cbaf;
+      --worm-blue-fill: #ffffff;
 
       --worm-neutral-stroke: #cccccc;
-      --worm-neutral-fill:   #ffffff;
+      --worm-neutral-fill: #ffffff;
 
       --grass-main: #007b32;
     }
@@ -63,79 +62,117 @@
       background: #000;
     }
 
-    #gameControls {
+    #gameControls,
+    #scienceControls {
       display: flex;
-	   
       justify-content: space-between;
       align-items: center;
-      margin-top: 6px;
-      margin-bottom: 8px;
       gap: 6px;
+      margin-top: 6px;
+    }
+
+    #gameControls {
+      margin-bottom: 8px;
+    }
+
+    #scienceControls {
+      gap: 8px;
     }
 
     #resetBtn,
-    #pauseBtn{
-	flex: 1;
-      padding: 4px 25px;
+    #pauseBtn,
+    #scienceModeBtn,
+    #scienceSettingsBtn {
+      padding: 4px 10px;
       font-size: 12px;
       border-radius: 2px;
       border: 1px solid #555;
       background: #181818;
       color: #eee;
       cursor: pointer;
-	  
-	  	    height: 24px;
-  line-height: 24px;
-  
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-	  
+      height: 24px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
+
+    #resetBtn,
+    #pauseBtn {
+      flex: 1;
+      padding-inline: 25px;
+    }
+
+    #scienceModeBtn {
+      flex: 2;
+    }
+
+    #scienceSettingsBtn {
+      flex: 1;
+    }
+
+    #pauseBtn:hover,
+    #resetBtn:hover,
+    
+    #scienceSettingsBtn:hover:enabled,
+    #helpBtn:hover {
+      background: #007b32;
+    }
+	
+	#scienceModeBtn:hover{
+	background: red;
+	
+	}
 
     #helpBtn {
       display: block;
-      margin: 0 auto;
-      margin-top:6px;
-      margin-bottom:8px;
+      margin: 6px auto 8px;
       padding: 3px 10px;
       font-size: 12px;
       border-radius: 2px;
-      border: 1px dotted #555;
+      border: 1px  #555;
       background: #181818;
       color: #aaa;
       cursor: pointer;
     }
 
     #helpBtn:hover {
-      background: #007b32;
-      color:#fff;
+      color: #fff;
+	  
     }
 
-    #pauseBtn:hover,
-    #resetBtn:hover {
-      background: #007b32;
+    #scienceModeBtn.active {
+      color: #fff;
+      background: #009a3e;
+      box-shadow: 0 0 8px rgba(0, 255, 120, 0.6);
+    }
+
+    #scienceSettingsBtn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      background: #181818;
+      color: #999;
     }
 
     #sidebar {
       width: 275px;
-      background: radial-gradient(circle at top, #222 0, #121212 55%, #050505 100%);
-      border-radius: 2px;
-      padding: 10px 12px;
-      box-shadow: 0 0 18px rgba(0,0,0,0.7);
-      box-sizing: border-box;
-      font-size: 13px;
-      border: 1px solid #333;
       height: 592px;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top, #222 0, #121212 55%, #050505 100%);
+      border: 1px solid #333;
+      border-radius: 2px;
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+      font-size: 13px;
     }
 
     #sidebar h1 {
       font-size: 18px;
       margin: 0 0 12px;
+      text-align: center;
     }
 
     #sidebar h2 {
@@ -154,7 +191,7 @@
     .color-buttons {
       display: flex;
       gap: 8px;
-      margin: 6px 0 6px;
+      margin: 6px 0;
     }
 
     .color-btn {
@@ -165,22 +202,23 @@
       cursor: pointer;
       padding: 0;
       outline: none;
-      box-shadow: 0 0 6px rgba(0,0,0,0.8);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
       transition: transform 0.1s ease, box-shadow 0.1s ease;
     }
 
-    .color-btn.red     { background: var(--color-red); }
-    .color-btn.green   { background: var(--color-green); }
-    .color-btn.blue    { background: var(--color-blue); }
+    .color-btn.red { background: var(--color-red); }
+    .color-btn.green { background: var(--color-green); }
+    .color-btn.blue { background: var(--color-blue); }
     .color-btn.neutral { background: #bbbbbb; }
 
     .color-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 8px rgba(255,255,255,0.3);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     }
+
     .color-btn:active {
       transform: translateY(1px) scale(0.96);
-      box-shadow: 0 0 4px rgba(0,0,0,0.9);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
     }
 
     #eraseBtn {
@@ -198,6 +236,7 @@
       align-items: center;
       gap: 4px;
     }
+
     #eraseBtn:hover {
       background: #272727;
     }
@@ -212,14 +251,14 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 4px;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0, 0, 0, 0.3);
       box-sizing: border-box;
     }
 
     .preview-empty {
       font-size: 11px;
       color: #888;
-      letter-spacing:1.2px;
+      letter-spacing: 1.2px;
     }
 
     .preview-circle {
@@ -242,24 +281,17 @@
       line-height: 2;
     }
 
-    #note2 {
+    .trait-note {
       margin-top: 6px;
       font-size: 11px;
       color: #ccc;
       line-height: 1.4;
-      letter-spacing:1.5px;
+      letter-spacing: 1.5px;
     }
 
-    #note2 .trait-red   { color: var(--ui-red-light); }
-    #note2 .trait-green { color: var(--ui-green-light); }
-    #note2 .trait-blue  { color: var(--ui-blue-light); }
-
-    .small-label {
-      margin-top: 6px;
-      display: block;
-      font-size: 8px;
-      color: #ccc;
-    }
+    .trait-note .trait-red { color: var(--ui-red-light); }
+    .trait-note .trait-green { color: var(--ui-green-light); }
+    .trait-note .trait-blue { color: var(--ui-blue-light); }
 
     #speciesNameInput {
       width: 100%;
@@ -325,24 +357,35 @@
     .species-circle.B { background: var(--color-blue); }
     .species-circle.N { background: #e0e0e0; }
 
-    #helpPanel {
+    #helpPanel,
+    #sciencePanel {
       position: fixed;
       top: 50%;
       left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(20, 20, 20, 0.97);
+      border: 2px solid #444;
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      color: #eee;
+      display: none;
+    }
+
+    #helpPanel {
       width: 600px;
       max-width: 90vw;
-      transform: translate(-50%, -50%);
-      background: rgba(20,20,20,0.97);
-      border: 2px solid #444;
-      padding: 16px;
-      z-index: 9999;
-      border-radius: 2px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      color: #eee;
-      font-size: 14px;
-      display: none;
       height: 500px;
       overflow-y: auto;
+      padding: 16px;
+      z-index: 9999;
+      font-size: 14px;
+    }
+
+    #sciencePanel {
+      width: 320px;
+      max-width: 92vw;
+      padding: 14px;
+      z-index: 10000;
     }
 
     #helpPanel h2 {
@@ -350,98 +393,6 @@
       color: #ffff66;
       font-size: 18px;
       text-align: center;
-    }
-
-    #closeHelpBtn {
-      margin-top: 12px;
-      padding: 6px 10px;
-      background: #222;
-      color: #eee;
-      border: 1px solid #555;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100%;
-      letter-spacing:2px;
-    }
-
-    #closeHelpBtn:hover {
-      background: #333;
-    }
-
-    /* === SCIENCE MODE UI === */
-    #scienceControls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    #scienceModeBtn,
-    #scienceSettingsBtn {
-
-      padding: 4px 10px;
-      font-size: 12px;
-      border-radius: 2px;
-      border: 1px solid #555;
-      background: #181818;
-      color: #eee;
-      cursor: pointer;
-   
-	  
-	    height: 24px;
-  line-height: 24px;
-  
-  display: flex;
-     flex: 2;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-#scienceSettingsBtn {
-
-flex:1;
-    }
-
-
-
-    #scienceModeBtn:hover,
-    #scienceSettingsBtn:hover:enabled {
-      background: #007b32;
-    }
-	
-	
-	#scienceModeBtn.active {
- 
-  color: #fff;
-    background: #009a3e;
-  box-shadow: 0 0 8px rgba(0,255,120,0.6);
-}
-
-
-    #scienceSettingsBtn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      background: #181818;
-      color: #999;
-    }
-
-    #sciencePanel {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 320px;
-      max-width: 92vw;
-      transform: translate(-50%, -50%);
-      background: rgba(20,20,20,0.97);
-      border: 2px solid #444;
-      padding: 14px;
-      z-index: 10000;
-      border-radius: 2px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      color: #eee;
-      display: none;
     }
 
     #sciencePanel h2 {
@@ -452,41 +403,9 @@ flex:1;
       letter-spacing: 1px;
     }
 
-    .science-row {
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .science-row label {
-      font-size:12px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      margin:0;
-    }
-
-    .science-input-wrap {
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .science-input {
-      width:90px;
-      padding:6px 8px;
-      background:#111;
-      border:1px solid #444;
-      color:#eee;
-      border-radius:2px;
-      font-size:12px;
-      box-sizing:border-box;
-    }
-
+    #closeHelpBtn,
     #closeScienceBtn {
-      margin-top: 12px;
+      margin-top:12px;
       padding: 8px 10px;
       background: #222;
       color: #eee;
@@ -494,11 +413,45 @@ flex:1;
       border-radius: 4px;
       cursor: pointer;
       width: 100%;
-      letter-spacing:2px;
+      letter-spacing: 2px;
     }
 
+    #closeHelpBtn:hover,
     #closeScienceBtn:hover {
       background: #333;
+    }
+
+    .science-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .science-row label {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+    }
+
+    .science-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .science-input {
+      width: 90px;
+      padding: 6px 8px;
+      background: #111;
+      border: 1px solid #444;
+      color: #eee;
+      border-radius: 2px;
+      font-size: 12px;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -511,15 +464,17 @@ flex:1;
 
     <aside id="sidebar">
       <div>
-        <h1><center>Välkommen till larv-labb</center></h1>
+        <h1>Välkommen till larv-labb</h1>
 
         <h2>Skapa en larv</h2>
-        <div id="note"><p>Klicka på färgcirklarna för att skapa en larv och klicka sedan in den i "naturen" till vänster.</p></div>
+        <div id="note">
+          <p>Klicka på färgcirklarna för att skapa en larv och klicka sedan in den i "naturen" till vänster.</p>
+        </div>
 
         <div class="color-buttons">
-          <button class="color-btn red"     data-color="R" title="Liv"></button>
-          <button class="color-btn green"   data-color="G" title="Hastighet"></button>
-          <button class="color-btn blue"    data-color="B" title="Syn"></button>
+          <button class="color-btn red" data-color="R" title="Liv"></button>
+          <button class="color-btn green" data-color="G" title="Hastighet"></button>
+          <button class="color-btn blue" data-color="B" title="Syn"></button>
           <button class="color-btn neutral" data-color="N" title="Neutral (påverkar inte egenskaper)"></button>
           <button id="eraseBtn" type="button">Sudda ✖</button>
         </div>
@@ -529,13 +484,13 @@ flex:1;
         <input id="speciesNameInput" type="text" maxlength="32" placeholder="Ge arten ett namn (valfritt)" />
 
         <p>Färger ger egenskaper:</p>
-        <div id="note2">
-          <span class="trait-red"><b>&nbsp&nbsp Röd</b></span> → ökar livslängd<br />
-          <span class="trait-green"><b>&nbsp&nbsp Orange</b></span> → ökar hastighet<br />
-          <span class="trait-blue"><b>&nbsp&nbsp Turkos</b></span> → förbättrar syn<br />
+        <div class="trait-note">
+          <span class="trait-red"><b>&nbsp;&nbsp;Röd</b></span> → ökar livslängd<br />
+          <span class="trait-green"><b>&nbsp;&nbsp;Orange</b></span> → ökar hastighet<br />
+          <span class="trait-blue"><b>&nbsp;&nbsp;Turkos</b></span> → förbättrar syn<br />
         </div>
 
-        <button id="helpBtn">Klicka här för utförligare instruktioner</button>
+        <button id="helpBtn">Klicka här för fler instruktioner</button>
 
         <div id="gameControls">
           <button id="pauseBtn" type="button">Pausa ⏸</button>
@@ -544,7 +499,7 @@ flex:1;
 
         <div id="scienceControls">
           <button id="scienceModeBtn" type="button" title="Varning! Slår av poäng!">Forskningsläge</button>
-          <button id="scienceSettingsBtn" type="button" title="Forskningsinställningar"  disabled>⚙ Meny </button>
+          <button id="scienceSettingsBtn" type="button" title="Forskningsinställningar" disabled>⚙ Meny</button>
         </div>
 
         <h2>Arter i spelet</h2>
@@ -555,6 +510,8 @@ flex:1;
   </div>
 
   <div id="helpPanel">
+
+
     <h2>Larv-labb: Instruktioner</h2>
     <p>
       Välkommen till Larv-labb! Du kan hantera larv-labb som ett spel eller strunta i poängen och bara bedriva forskning på dessa virtuella larver.
@@ -568,10 +525,10 @@ flex:1;
     </p>
 
     <b>Färger ger larverna egenskaper:</b><br />
-    <div id="note2">
-      <span class="trait-red"><b>&nbsp&nbsp Röda delar</b></span> → ökar larvens livslängd<br />
-      <span class="trait-green"><b>&nbsp&nbsp Oranga delar</b></span> → ökar larvens hastighet<br />
-      <span class="trait-blue"><b>&nbsp&nbsp Turkosa delar</b></span> → förbättrar larvens syn. Den både utökar vinkel och synavstånd.<br /><br />
+    <div class="trait-note">
+      <span class="trait-red"><b>&nbsp;&nbsp;Röda delar</b></span> → ökar larvens livslängd<br />
+      <span class="trait-green"><b>&nbsp;&nbsp;Oranga delar</b></span> → ökar larvens hastighet<br />
+      <span class="trait-blue"><b>&nbsp;&nbsp;Turkosa delar</b></span> → förbättrar larvens syn. Den både utökar vinkel och synavstånd.<br /><br />
       <span><b><span style="color: #ccc;">Gråa delar</span></b> är neutrala och påverkar inte larven utöver det att den måste äta mer. Dessa kan t.ex. användas som kontrollgrupp vid experiment.<br />
     </div>
 
@@ -580,32 +537,33 @@ flex:1;
     <p>Om du vill ha poäng så är målet är att skapa ett så rikt och stabilt ekosystem som möjligt.</p>
     <p>Poängen står i nedre vänstra hörnet och du får <b>x²</b> poäng per sekund där <b>x är antalet larvarter</b> (inte individer) som lever i ditt spel.</p>
     <p><span style="color: red;">Men</span> att skapa en ny larv <span style="color: red;">halverar</span> din poäng.</p>
-<br />
-<h2>Forskningsläge</h2>
-        <p><span style="color: red;">Varning!</span> Att aktivera forskningsläge <span style="color: red;">slår av poängräkningen</span> tills dess att du trycker "Reset" och startar om spelet eller uppdaterar sidan. Forskningsläge är därmed för dig som är mer intresserad av experiment än poäng. </p>
-	
-
-	   <p>När du aktiverar forskningsläge så visas <span style="color: #11c259;">gräsmängden</span> i nedre högra hörnet. Om du bedriver forskning och samlar in data så kan det vara bra att använda pausefunktionen för att vid regelbundna intervall t.ex. notera gräsmängd och antal individer av varje art. </p>
-	   <p>När forskningsläget är aktiverat kan du också klicka på <span style="color: yellow;">⚙ Meny</span>. Med denna knapp kan du aktivera <span style="color: #07cbaf;">muta</span><span style="color: #ffbc30;">tio</span><span style="color: #e00045;">ner</span> samt reglera hastigheten på <span style="color: #11c259;">gräsåterväxt</span>.</p>
-	   
-	   <p><b>Mutationer</b></p>
-	   <p>Mutationer gör att <span style="color: #07cbaf;">evo</span><span style="color: #ffbc30;">lu</span><span style="color: #e00045;">tion</span> kan ske i ditt ekosystem. Mutationer kan ske i larvernas barn. Mutationsgraden anges i procent i decimalform där 1.0 = 100%.  Ett värde på t.ex 0.01 (alltså 1%) innebär att larvernas barn har 1 procents chans att antingen: </p>
-	   <ul>
-  <li>switcha färg på en av sina delar</li>
-  <li>utöka med en slumpad del</li>
-  <li>eller tappa en slumpad del</li>
-</ul>
-
 
     <br />
-    <p align="center" style="color: #ccc;"><i> Hör av dig till Tommie om du hittar buggar eller har idéer om förbättringar.</i></p>
+	 
+	
+    <h2>Forskningsläge</h2>
+    <p><span style="color: red;">Varning!</span> Att aktivera forskningsläge <span style="color: red;">slår av poängräkningen</span> tills dess att du trycker <span style="color: yellow;">Reset</span> utan forskningsläget påslaget eller uppdaterar sidan. Forskningsläge är därmed för dig som är mer intresserad av experiment än poäng.</p>
 
-    <button id="closeHelpBtn">Stäng fönster</button>
+    <p>När du aktiverar forskningsläge så visas en timer istället för score i nedre vänstra hörnet och  <span style="color: #11c259;">gräsmängden</span> i nedre högra hörnet. Om du bedriver forskning och samlar in data så kan det vara bra att använda pausefunktionen för att vid regelbundna intervall t.ex. notera gräsmängd och antal individer av varje art.</p>
+    <p>När forskningsläget är aktiverat kan du också klicka på <span style="color: yellow;">⚙ Meny</span>. Med denna knapp kan du aktivera <span style="color: #07cbaf;">muta</span><span style="color: #ffbc30;">tio</span><span style="color: #e00045;">ner</span> samt reglera hastigheten på <span style="color: #11c259;">gräsåterväxt</span>.</p>
+
+    <p><b>Mutationer</b></p>
+    <p>Mutationer gör att <span style="color: #07cbaf;">evo</span><span style="color: #ffbc30;">lu</span><span style="color: #e00045;">tion</span> kan ske i ditt ekosystem. Mutationer kan ske i larvernas barn. Mutationsgraden anges i procent i decimalform där 1.0 = 100%. Ett värde på t.ex 0.01 (alltså 1%) innebär att larvernas barn har 1 procents chans att antingen:</p>
+    <ul>
+      <li>switcha färg på en av sina delar</li>
+      <li>utöka med en slumpad del</li>
+      <li>eller tappa en slumpad del</li>
+    </ul>
+
+    <br />
+    <p align="center" style="color: #ccc;"><i>Hör av dig till Tommie om du hittar buggar eller har idéer om förbättringar.</i></p>
+
+    <button id="closeHelpBtn">Stäng instruktioner</button>
   </div>
 
   <div id="sciencePanel">
     <h2>Forskningsläge</h2>
-	<br />
+    <br />
 
     <div class="science-row">
       <label>
@@ -644,29 +602,23 @@ flex:1;
       </div>
     </div>
 
-    <div style="margin-top:10px; font-size:12px; color:#bbb; line-height:1.35;">
-
-    </div>
-
     <button id="closeScienceBtn">Stäng fönster</button>
   </div>
 
   <script>
     const CELL_SIZE = 16;
 
-    const DEFAULT_FOOD_RESPAWN_RATE = 0.0001;
-    let foodRespawnRate = DEFAULT_FOOD_RESPAWN_RATE;
-
+    const DEFAULT_FOOD_RESPAWN_RATE = 0.00013;
     const INITIAL_GRASS_PROB = 0.05;
+    const CHILD_DIVERGENCE_ANGLE = Math.PI / 5;
 	
-		const CHILD_DIVERGENCE_ANGLE = Math.PI / 5; 
+	const UI_REFRESH_INTERVAL = 0.3;
+	const GRASS_REFRESH_INTERVAL = 0.3;
 
     const BASE_SPEED_PER_CELL = 0.04;
     const SPEED_PER_GREEN_PER_CELL = 0.025;
-
     const SPEED_LENGTH_PENALTY_PER_SEGMENT = 0.0002;
     const GREEN_SPEED_DIVISOR = 0.2;
-
     const MIN_SPEED_PER_CELL = 0.005;
 
     const BASE_LIFESPAN_FRAMES = 300;
@@ -674,13 +626,15 @@ flex:1;
 
     const BASE_VISION_CELLS = 1;
     const VISION_PER_BLUE_CELLS = 2;
-
     const BASE_VISION_ANGLE = 0.4;
     const VISION_ANGLE_PER_BLUE = Math.PI / 14;
 
     const ENABLE_NUTRIENTS = 1;
     const NUTRIENT_DEPOSIT_PROB = 0.1;
     const NUTRIENT_RECOLOR_PROB = 1;
+
+    const GRASS_NONE = 0;
+    const GRASS_YES = 1;
 
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
@@ -691,51 +645,44 @@ flex:1;
     let gridWidth = Math.floor(CANVAS_WIDTH / CELL_SIZE);
     let gridHeight = Math.floor(CANVAS_HEIGHT / CELL_SIZE);
 
-    const GRASS_NONE = 0;
-    const GRASS_YES  = 1;
-
     const rootStyles = getComputedStyle(document.documentElement);
+    const GRASS_COLOR = (rootStyles.getPropertyValue("--grass-main") || "#0f6610").trim();
 
-    const GRASS_COLOR = (rootStyles.getPropertyValue('--grass-main') || '#0f6610').trim();
+    const WORM_RED_STROKE = rootStyles.getPropertyValue("--worm-red-stroke").trim();
+    const WORM_RED_FILL = rootStyles.getPropertyValue("--worm-red-fill").trim();
+    const WORM_GREEN_STROKE = rootStyles.getPropertyValue("--worm-green-stroke").trim();
+    const WORM_GREEN_FILL = rootStyles.getPropertyValue("--worm-green-fill").trim();
+    const WORM_BLUE_STROKE = rootStyles.getPropertyValue("--worm-blue-stroke").trim();
+    const WORM_BLUE_FILL = rootStyles.getPropertyValue("--worm-blue-fill").trim();
+    const WORM_NEUTRAL_STROKE = (rootStyles.getPropertyValue("--worm-neutral-stroke") || "#999999").trim();
+    const WORM_NEUTRAL_FILL = (rootStyles.getPropertyValue("--worm-neutral-fill") || "#f0f0f0").trim();
 
-    const WORM_RED_STROKE      = rootStyles.getPropertyValue('--worm-red-stroke').trim();
-    const WORM_RED_FILL        = rootStyles.getPropertyValue('--worm-red-fill').trim();
-    const WORM_GREEN_STROKE    = rootStyles.getPropertyValue('--worm-green-stroke').trim();
-    const WORM_GREEN_FILL      = rootStyles.getPropertyValue('--worm-green-fill').trim();
-    const WORM_BLUE_STROKE     = rootStyles.getPropertyValue('--worm-blue-stroke').trim();
-    const WORM_BLUE_FILL       = rootStyles.getPropertyValue('--worm-blue-fill').trim();
-    const WORM_NEUTRAL_STROKE  = (rootStyles.getPropertyValue('--worm-neutral-stroke') || '#999999').trim();
-    const WORM_NEUTRAL_FILL    = (rootStyles.getPropertyValue('--worm-neutral-fill')   || '#f0f0f0').trim();
-
+    let foodRespawnRate = DEFAULT_FOOD_RESPAWN_RATE;
     let grid = [];
     const worms = [];
 
     let score = 0;
     let lastTimestamp = null;
     let scoreTimeAccumulator = 0;
+	
+	let uiRefreshAccumulator = 0;
+	let grassRefreshAccumulator = 0;
+	let scienceElapsedTime = 0;
 
     let mutationEnabled = false;
     let mutationRate = 0.01;
 
     let scienceMode = false;
     let hasScienceEverBeenEnabled = false;
-
     let grassCountCached = 0;
 
     let isPaused = true;
+
     const pauseBtn = document.getElementById("pauseBtn");
     const resetBtn = document.getElementById("resetBtn");
-    pauseBtn.textContent = "Starta ▶";
-
-    pauseBtn.addEventListener("click", () => {
-      isPaused = !isPaused;
-      pauseBtn.textContent = isPaused ? "Starta ▶" : "Pause ⏸";
-    });
-
     const previewEl = document.getElementById("preview");
     const eraseBtn = document.getElementById("eraseBtn");
     const colorButtons = document.querySelectorAll(".color-btn");
-
     const speciesNameInput = document.getElementById("speciesNameInput");
     const speciesListEl = document.getElementById("speciesList");
 
@@ -748,50 +695,40 @@ flex:1;
     const mutationRateInput = document.getElementById("mutationRateInput");
     const grassRegrowRateInput = document.getElementById("grassRegrowRateInput");
 
+    const helpPanel = document.getElementById("helpPanel");
+    const closeHelpBtn = document.getElementById("closeHelpBtn");
+    const helpBtn = document.getElementById("helpBtn");
+
+    const speciesMap = new Map();
+
+    let speciesCreationCounter = 0;
+    let speciesNameCounter = 1;
+    let currentGenome = [];
+
+    pauseBtn.textContent = "Starta ▶";
+
+    pauseBtn.addEventListener("click", () => {
+      isPaused = !isPaused;
+      pauseBtn.textContent = isPaused ? "Starta ▶" : "Pause ⏸";
+    });
+
     mutationEnabledCheckbox.addEventListener("change", () => {
       mutationEnabled = mutationEnabledCheckbox.checked;
     });
 
     mutationRateInput.addEventListener("input", () => {
-      const v = parseFloat(mutationRateInput.value);
-      if (!isNaN(v) && v >= 0 && v <= 1) {
-        mutationRate = v;
+      const value = parseFloat(mutationRateInput.value);
+      if (!isNaN(value) && value >= 0 && value <= 1) {
+        mutationRate = value;
       }
     });
 
     grassRegrowRateInput.addEventListener("input", () => {
-      const v = parseFloat(grassRegrowRateInput.value);
-      if (!isNaN(v) && v >= 0 && v <= 1) {
-        foodRespawnRate = v;
+      const value = parseFloat(grassRegrowRateInput.value);
+      if (!isNaN(value) && value >= 0 && value <= 1) {
+        foodRespawnRate = value;
       }
     });
-
-    const speciesMap = new Map();
-    let speciesCreationCounter = 0;
-
-    let speciesNameCounter = 1;
-    function generateDefaultSpeciesName() {
-      return `Art ${speciesNameCounter++}`;
-    }
-
-    let currentGenome = [];
-
-    function updatePreview() {
-      previewEl.innerHTML = "";
-      if (currentGenome.length === 0) {
-        const span = document.createElement("span");
-        span.className = "preview-empty";
-        span.textContent = "Ingen larv ännu.";
-        previewEl.appendChild(span);
-        return;
-      }
-
-      for (const c of currentGenome) {
-        const div = document.createElement("div");
-        div.className = "preview-circle " + c;
-        previewEl.appendChild(div);
-      }
-    }
 
     colorButtons.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -806,16 +743,86 @@ flex:1;
       updatePreview();
     });
 
-    updatePreview();
+    resetBtn.addEventListener("click", resetGame);
+
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      spawnWormAt(x, y);
+    });
+
+    closeHelpBtn.addEventListener("click", () => {
+      helpPanel.style.display = "none";
+    });
+
+    helpBtn.addEventListener("click", toggleHelp);
+
+    scienceModeBtn.addEventListener("click", () => {
+      setScienceMode(!scienceMode);
+    });
+
+    scienceSettingsBtn.addEventListener("click", () => {
+      if (!scienceMode) return;
+      sciencePanel.style.display =
+        (sciencePanel.style.display === "none" || sciencePanel.style.display === "")
+          ? "block"
+          : "none";
+    });
+
+    closeScienceBtn.addEventListener("click", () => {
+      sciencePanel.style.display = "none";
+    });
+
+    window.addEventListener("keydown", (e) => {
+      const active = document.activeElement;
+      const isTyping =
+        active &&
+        (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable);
+
+      if (!isTyping && e.key.toLowerCase() === "h") {
+        toggleHelp();
+      }
+
+      if (!isTyping && e.key === "Escape") {
+        sciencePanel.style.display = "none";
+      }
+    });
+
+    window.addEventListener("load", init);
+
+    function generateDefaultSpeciesName() {
+      return `Art ${speciesNameCounter++}`;
+    }
+
+    function updatePreview() {
+      previewEl.innerHTML = "";
+
+      if (currentGenome.length === 0) {
+        const span = document.createElement("span");
+        span.className = "preview-empty";
+        span.textContent = "Ingen larv ännu.";
+        previewEl.appendChild(span);
+        return;
+      }
+
+      for (const color of currentGenome) {
+        const div = document.createElement("div");
+        div.className = "preview-circle " + color;
+        previewEl.appendChild(div);
+      }
+    }
 
     function getCompositionKey(segmentColors) {
       let r = 0, g = 0, b = 0, n = 0;
-      for (const c of segmentColors) {
-        if      (c === "R") r++;
-        else if (c === "G") g++;
-        else if (c === "B") b++;
-        else if (c === "N") n++;
+
+      for (const color of segmentColors) {
+        if (color === "R") r++;
+        else if (color === "G") g++;
+        else if (color === "B") b++;
+        else if (color === "N") n++;
       }
+
       return `R${r}G${g}B${b}N${n}`;
     }
 
@@ -856,7 +863,7 @@ flex:1;
       for (let y = 0; y < gridHeight; y++) {
         for (let x = 0; x < gridWidth; x++) {
           const { grass } = grid[cellIndex(x, y)];
-          ctx.fillStyle = (grass === GRASS_YES) ? GRASS_COLOR : "#000000";
+          ctx.fillStyle = grass === GRASS_YES ? GRASS_COLOR : "#000000";
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
       }
@@ -876,16 +883,16 @@ flex:1;
       if (choice === "color") {
         const idx = (Math.random() * newGenome.length) | 0;
         let newColor = newGenome[idx];
-        if (colors.length > 1) {
-          while (newColor === newGenome[idx]) {
-            newColor = colors[(Math.random() * colors.length) | 0];
-          }
+
+        while (newColor === newGenome[idx]) {
+          newColor = colors[(Math.random() * colors.length) | 0];
         }
+
         newGenome[idx] = newColor;
       } else if (choice === "remove") {
         const idx = (Math.random() * newGenome.length) | 0;
         newGenome.splice(idx, 1);
-      } else if (choice === "add") {
+      } else {
         const newColor = colors[(Math.random() * colors.length) | 0];
         const idx = (Math.random() * (newGenome.length + 1)) | 0;
         newGenome.splice(idx, 0, newColor);
@@ -901,30 +908,25 @@ flex:1;
         this.filled = new Array(segmentColors.length).fill(false);
         this.positions = [];
 
-        const len = segmentColors.length;
-        for (let i = 0; i < len; i++) {
-          this.positions.push({ x: x, y: y });
+        for (let i = 0; i < segmentColors.length; i++) {
+          this.positions.push({ x, y });
         }
-		
-		
 
-        this.angle = (initialAngle !== null) ? initialAngle : (Math.random() * Math.PI * 2);
-this.angleLockFrames = lockFrames;
-
-this.hasDivergedAfterLock = false;
-this.postLockDivergence =
-  (Math.random() < 0.5 ? -1 : 1) * CHILD_DIVERGENCE_ANGLE;
+        this.angle = initialAngle !== null ? initialAngle : Math.random() * Math.PI * 2;
+        this.angleLockFrames = lockFrames;
+        this.hasDivergedAfterLock = false;
+        this.postLockDivergence =
+          (Math.random() < 0.5 ? -1 : 1) * CHILD_DIVERGENCE_ANGLE;
 
         let countR = 0, countG = 0, countB = 0;
-        for (const c of segmentColors) {
-          if (c === "R") countR++;
-          else if (c === "G") countG++;
-          else if (c === "B") countB++;
+        for (const color of segmentColors) {
+          if (color === "R") countR++;
+          else if (color === "G") countG++;
+          else if (color === "B") countB++;
         }
 
         const totalSegments = segmentColors.length;
         const lengthPenaltyPerCell = totalSegments * SPEED_LENGTH_PENALTY_PER_SEGMENT;
-
         const greenFactor = countG / (1 + GREEN_SPEED_DIVISOR * countG);
         const greenBoostPerCell = SPEED_PER_GREEN_PER_CELL * greenFactor;
 
@@ -942,8 +944,6 @@ this.postLockDivergence =
         this.age = 0;
 
         this.visionRadiusCells = BASE_VISION_CELLS + countB * VISION_PER_BLUE_CELLS;
-        this.vision = this.visionRadiusCells * CELL_SIZE;
-
         this.maxVisionAngle = BASE_VISION_ANGLE + countB * VISION_ANGLE_PER_BLUE;
 
         this.segmentSpacing = CELL_SIZE * 0.9;
@@ -954,15 +954,13 @@ this.postLockDivergence =
       depositNutrients() {
         if (!ENABLE_NUTRIENTS) return;
 
-        const len = this.segmentColors.length;
-
-        for (let i = 0; i < len; i++) {
+        for (let i = 0; i < this.segmentColors.length; i++) {
           if (Math.random() >= NUTRIENT_DEPOSIT_PROB) continue;
 
           const pos = this.positions[i];
-
           const gx = Math.floor(pos.x / CELL_SIZE);
           const gy = Math.floor(pos.y / CELL_SIZE);
+
           if (gx < 0 || gx >= gridWidth || gy < 0 || gy >= gridHeight) continue;
 
           const allCandidates = [];
@@ -978,6 +976,7 @@ this.postLockDivergence =
 
               const idx = cellIndex(xx, yy);
               allCandidates.push(idx);
+
               if (grid[idx].grass === GRASS_NONE) {
                 emptyCandidates.push(idx);
               }
@@ -1020,22 +1019,18 @@ this.postLockDivergence =
 
         if (head.x < 0) {
           head.x = 0;
-          this.angle = Math.PI - this.angle;
-          this.angle += (Math.random() - 0.5) * 0.3;
+          this.angle = Math.PI - this.angle + (Math.random() - 0.5) * 0.3;
         } else if (head.x > CANVAS_WIDTH) {
           head.x = CANVAS_WIDTH;
-          this.angle = Math.PI - this.angle;
-          this.angle += (Math.random() - 0.5) * 0.3;
+          this.angle = Math.PI - this.angle + (Math.random() - 0.5) * 0.3;
         }
 
         if (head.y < 0) {
           head.y = 0;
-          this.angle = -this.angle;
-          this.angle += (Math.random() - 0.5) * 0.3;
+          this.angle = -this.angle + (Math.random() - 0.5) * 0.3;
         } else if (head.y > CANVAS_HEIGHT) {
           head.y = CANVAS_HEIGHT;
-          this.angle = -this.angle;
-          this.angle += (Math.random() - 0.5) * 0.3;
+          this.angle = -this.angle + (Math.random() - 0.5) * 0.3;
         }
 
         for (let i = 1; i < this.positions.length; i++) {
@@ -1045,6 +1040,7 @@ this.postLockDivergence =
           const dy = seg.y - prev.y;
           const dist = Math.hypot(dx, dy);
           const desired = this.segmentSpacing;
+
           if (dist > desired) {
             const t = (dist - desired) / dist;
             seg.x -= dx * t;
@@ -1059,34 +1055,32 @@ this.postLockDivergence =
         }
 
         if (this.angleLockFrames > 0) {
-  this.angleLockFrames--;
+          this.angleLockFrames--;
 
-  if (this.angleLockFrames === 0 && !this.hasDivergedAfterLock) {
-    this.angle += this.postLockDivergence;
-    this.hasDivergedAfterLock = true;
-  }
-}
+          if (this.angleLockFrames === 0 && !this.hasDivergedAfterLock) {
+            this.angle += this.postLockDivergence;
+            this.hasDivergedAfterLock = true;
+          }
+        }
       }
 
       seekFood() {
-        const allFilled = this.filled.every(f => f);
-        if (allFilled) return;
-
+        if (this.filled.every(Boolean)) return;
         if (this.visionRadiusCells <= 0 || this.maxVisionAngle <= 0) return;
 
         const head = this.positions[0];
         const gx = Math.floor(head.x / CELL_SIZE);
         const gy = Math.floor(head.y / CELL_SIZE);
 
-        const visionCells = this.visionRadiusCells;
         let bestDist2 = Infinity;
         let targetX = null;
         let targetY = null;
 
-        for (let dy = -visionCells; dy <= visionCells; dy++) {
+        for (let dy = -this.visionRadiusCells; dy <= this.visionRadiusCells; dy++) {
           const yy = gy + dy;
           if (yy < 0 || yy >= gridHeight) continue;
-          for (let dx = -visionCells; dx <= visionCells; dx++) {
+
+          for (let dx = -this.visionRadiusCells; dx <= this.visionRadiusCells; dx++) {
             const xx = gx + dx;
             if (xx < 0 || xx >= gridWidth) continue;
 
@@ -1103,9 +1097,7 @@ this.postLockDivergence =
             let diff = angleToCell - this.angle;
             diff = Math.atan2(Math.sin(diff), Math.cos(diff));
 
-            if (Math.abs(diff) > this.maxVisionAngle) {
-              continue;
-            }
+            if (Math.abs(diff) > this.maxVisionAngle) continue;
 
             if (dist2 < bestDist2) {
               bestDist2 = dist2;
@@ -1117,10 +1109,9 @@ this.postLockDivergence =
 
         if (targetX !== null) {
           const angleToTarget = Math.atan2(targetY - head.y, targetX - head.x);
-          const turnStrength = 0.4;
           let diff = angleToTarget - this.angle;
           diff = Math.atan2(Math.sin(diff), Math.cos(diff));
-          this.angle += diff * turnStrength;
+          this.angle += diff * 0.4;
         }
       }
 
@@ -1128,24 +1119,23 @@ this.postLockDivergence =
         const head = this.positions[0];
         const gx = Math.floor(head.x / CELL_SIZE);
         const gy = Math.floor(head.y / CELL_SIZE);
+
         if (gx < 0 || gx >= gridWidth || gy < 0 || gy >= gridHeight) return;
 
         const idx = cellIndex(gx, gy);
         const cell = grid[idx];
         if (cell.grass === GRASS_NONE) return;
 
-        let foodPoints = 1;
         cell.grass = GRASS_NONE;
 
-        for (let i = 0; i < this.segmentColors.length && foodPoints > 0; i++) {
+        for (let i = 0; i < this.segmentColors.length; i++) {
           if (!this.filled[i]) {
             this.filled[i] = true;
-            foodPoints--;
+            break;
           }
         }
 
-        const allFilledNow = this.filled.every(f => f);
-        if (allFilledNow) {
+        if (this.filled.every(Boolean)) {
           this.reproduce();
           this.filled = new Array(this.segmentColors.length).fill(false);
         }
@@ -1153,15 +1143,13 @@ this.postLockDivergence =
 
       reproduce() {
         const head = this.positions[0];
-
         const spawnDist = CELL_SIZE * 0.1;
+
         let nx = head.x + Math.cos(this.angle) * spawnDist;
         let ny = head.y + Math.sin(this.angle) * spawnDist;
 
-        if (nx < 0) nx = 0;
-        if (nx > CANVAS_WIDTH) nx = CANVAS_WIDTH;
-        if (ny < 0) ny = 0;
-        if (ny > CANVAS_HEIGHT) ny = CANVAS_HEIGHT;
+        nx = Math.max(0, Math.min(CANVAS_WIDTH, nx));
+        ny = Math.max(0, Math.min(CANVAS_HEIGHT, ny));
 
         const LOCK_FRAMES_FOR_CHILD = 4;
 
@@ -1170,16 +1158,17 @@ this.postLockDivergence =
           childGenome = mutateGenome(childGenome);
         }
 
-        const childSpecies = ensureSpeciesRegistered(childGenome);
-        childSpecies.everAlive++;
+        ensureSpeciesRegistered(childGenome);
 
-        worms.push(new Worm(
-          nx,
-          ny,
-          childGenome,
-          this.angle,
-          LOCK_FRAMES_FOR_CHILD
-        ));
+        worms.push(
+          new Worm(
+            nx,
+            ny,
+            childGenome,
+            this.angle,
+            LOCK_FRAMES_FOR_CHILD
+          )
+        );
       }
 
       draw() {
@@ -1214,13 +1203,8 @@ this.postLockDivergence =
           ctx.beginPath();
           ctx.arc(pos.x, pos.y, strokeRadius, 0, Math.PI * 2);
 
-          if (filled && fillColor) {
-            ctx.fillStyle = fillColor;
-            ctx.fill();
-          } else {
-            ctx.fillStyle = "rgba(0,0,0,0.6)";
-            ctx.fill();
-          }
+          ctx.fillStyle = filled && fillColor ? fillColor : "rgba(0,0,0,0.6)";
+          ctx.fill();
 
           ctx.lineWidth = strokeWidth;
           ctx.strokeStyle = strokeColor;
@@ -1231,16 +1215,8 @@ this.postLockDivergence =
 
     function ensureSpeciesRegistered(genomeArray, providedName = null) {
       const compKey = getCompositionKey(genomeArray);
-
-      let r = 0, g = 0, b = 0, n = 0;
-      for (const c of genomeArray) {
-        if      (c === "R") r++;
-        else if (c === "G") g++;
-        else if (c === "B") b++;
-        else if (c === "N") n++;
-      }
-
       let species = speciesMap.get(compKey);
+
       if (!species) {
         let nameToUse = (providedName || "").trim();
         if (!nameToUse) {
@@ -1252,15 +1228,12 @@ this.postLockDivergence =
           genome: genomeArray.slice(),
           name: nameToUse,
           aliveCount: 0,
-          everAlive: 0,
-          rCount: r,
-          gCount: g,
-          bCount: b,
-          nCount: n,
           creationIndex: speciesCreationCounter++
         };
+
         speciesMap.set(compKey, species);
       }
+
       return species;
     }
 
@@ -1284,20 +1257,20 @@ this.postLockDivergence =
         return a.creationIndex - b.creationIndex;
       });
 
-      for (const s of speciesArray) {
+      for (const species of speciesArray) {
         const row = document.createElement("div");
-        row.className = "species-row" + (s.aliveCount === 0 ? " dead" : "");
+        row.className = "species-row" + (species.aliveCount === 0 ? " dead" : "");
 
         const left = document.createElement("div");
 
         const nameSpan = document.createElement("span");
         nameSpan.className = "species-name";
-        nameSpan.textContent = ' ' + s.name + ' ';
+        nameSpan.textContent = " " + species.name + " ";
 
         const genomeSpan = document.createElement("span");
         genomeSpan.className = "species-genome";
 
-        for (const letter of s.genome) {
+        for (const letter of species.genome) {
           const dot = document.createElement("span");
           dot.className = "species-circle " + letter;
           genomeSpan.appendChild(dot);
@@ -1308,7 +1281,7 @@ this.postLockDivergence =
 
         const right = document.createElement("div");
         right.className = "species-count";
-        right.textContent = (s.aliveCount > 0) ? `${s.aliveCount}` : "R.I.P.";
+        right.textContent = species.aliveCount > 0 ? String(species.aliveCount) : "R.I.P.";
 
         row.appendChild(left);
         row.appendChild(right);
@@ -1320,9 +1293,7 @@ this.postLockDivergence =
       if (currentGenome.length === 0) return;
 
       const enteredName = speciesNameInput.value.trim();
-
-      const species = ensureSpeciesRegistered(currentGenome, enteredName);
-      species.everAlive++;
+      ensureSpeciesRegistered(currentGenome, enteredName);
 
       worms.push(new Worm(x, y, currentGenome));
 
@@ -1334,126 +1305,121 @@ this.postLockDivergence =
     }
 
     function countGrassCells() {
-      let c = 0;
+      let count = 0;
       for (let i = 0; i < grid.length; i++) {
-        if (grid[i].grass === GRASS_YES) c++;
+        if (grid[i].grass === GRASS_YES) count++;
       }
-      return c;
+      return count;
     }
 
     function update(dt) {
-      randomizeGridCells();
+	  randomizeGridCells();
 
-      for (const worm of worms) {
-        worm.update();
-      }
-      for (let i = worms.length - 1; i >= 0; i--) {
-        if (!worms[i].alive) worms.splice(i, 1);
+	  for (const worm of worms) {
+		worm.update();
+	  }
+
+	  for (let i = worms.length - 1; i >= 0; i--) {
+		if (!worms[i].alive) worms.splice(i, 1);
+	  }
+
+	  speciesMap.forEach(species => {
+		species.aliveCount = 0;
+	  });
+
+	  for (const worm of worms) {
+		if (!worm.alive) continue;
+		const species = speciesMap.get(worm.typeKey);
+		if (species) species.aliveCount++;
+	  }
+
+	  uiRefreshAccumulator += dt;
+	  if (uiRefreshAccumulator >= UI_REFRESH_INTERVAL) {
+		renderSpeciesList();
+		uiRefreshAccumulator -= UI_REFRESH_INTERVAL;
+	  }
+
+	  const typeSet = new Set();
+	  for (const worm of worms) {
+		if (worm.alive) typeSet.add(worm.typeKey);
+	  }
+
+	  const distinctTypes = typeSet.size;
+
+	  if (!hasScienceEverBeenEnabled) {
+		scoreTimeAccumulator += dt;
+
+		if (scoreTimeAccumulator >= 1) {
+		  const wholeSeconds = Math.floor(scoreTimeAccumulator);
+		  if (distinctTypes > 0) {
+			score += (distinctTypes ** 2) * wholeSeconds;
+		  }
+		  scoreTimeAccumulator -= wholeSeconds;
+		}
+	  }
+
+	  if (scienceMode) {
+		scienceElapsedTime += dt;
+
+		grassRefreshAccumulator += dt;
+		if (grassRefreshAccumulator >= GRASS_REFRESH_INTERVAL) {
+		  grassCountCached = countGrassCells();
+		  grassRefreshAccumulator -= GRASS_REFRESH_INTERVAL;
+		}
+	  }
+	}
+
+    function drawOutlinedText(text, x, y, align = "left", font = "24px 'Press Start 2P'") {
+      ctx.save();
+      ctx.font = font;
+      ctx.textAlign = align;
+      ctx.textBaseline = "bottom";
+      ctx.imageSmoothingEnabled = false;
+
+      ctx.fillStyle = "#000000";
+      const offsets = [
+        [-1, 0],
+        [1, 0],
+        [0, -1],
+        [0, 1]
+      ];
+
+      for (const [ox, oy] of offsets) {
+        ctx.fillText(text, x + ox, y + oy);
       }
 
-      speciesMap.forEach(s => s.aliveCount = 0);
-      for (const worm of worms) {
-        if (!worm.alive) continue;
-        const s = speciesMap.get(worm.typeKey);
-        if (s) s.aliveCount++;
-      }
-      renderSpeciesList();
-
-      const typeSet = new Set();
-      for (const worm of worms) {
-        if (worm.alive) typeSet.add(worm.typeKey);
-      }
-      const distinctTypes = typeSet.size;
-
-      if (!hasScienceEverBeenEnabled) {
-        scoreTimeAccumulator += dt;
-        if (scoreTimeAccumulator >= 1) {
-          const wholeSeconds = Math.floor(scoreTimeAccumulator);
-          if (distinctTypes > 0) {
-            score += (distinctTypes ** 2) * wholeSeconds;
-          }
-          scoreTimeAccumulator -= wholeSeconds;
-        }
-      }
-
-      if (scienceMode) {
-        grassCountCached = countGrassCells();
-      }
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(text, x, y);
+      ctx.restore();
     }
 
     function drawScore() {
       if (scienceMode) return;
-
-      const text = String(score);
-
-      ctx.save();
-      ctx.font = "24px 'Press Start 2P'";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "bottom";
-
-      const x = Math.round(8);
-      const y = Math.round(CANVAS_HEIGHT - 8);
-
-      ctx.imageSmoothingEnabled = false;
-
-      ctx.fillStyle = "#000000";
-      const offsets = [
-        [-1, 0],
-        [ 1, 0],
-        [ 0,-1],
-        [ 0, 1],
-      ];
-      for (const [ox, oy] of offsets) {
-        ctx.fillText(text, x + ox, y + oy);
-      }
-
-      ctx.fillStyle = "#ffffff";
-      ctx.fillText(text, x, y);
-
-      ctx.restore();
+      drawOutlinedText(`Poäng: ${score}`, 8, CANVAS_HEIGHT - 8, "left", "12px 'Press Start 2P'");
     }
 
     function drawGrassReadout() {
-      if (!scienceMode) return;
+	  if (!scienceMode) return;
 
-      const maxCells = gridWidth * gridHeight;
-      const text = `Gräs: ${grassCountCached}/${maxCells}`;
-
-      ctx.save();
-      ctx.font = "12px 'Press Start 2P'";
-      ctx.textAlign = "right";
-      ctx.textBaseline = "bottom";
-
-      const x = Math.round(CANVAS_WIDTH - 8);
-      const y = Math.round(CANVAS_HEIGHT - 8);
-
-      ctx.imageSmoothingEnabled = false;
-
-      ctx.fillStyle = "#000000";
-      const offsets = [
-        [-1, 0],
-        [ 1, 0],
-        [ 0,-1],
-        [ 0, 1],
-      ];
-      for (const [ox, oy] of offsets) {
-        ctx.fillText(text, x + ox, y + oy);
-      }
-
-      ctx.fillStyle = "#ffffff";
-      ctx.fillText(text, x, y);
-
-      ctx.restore();
-    }
+	  const maxCells = gridWidth * gridHeight;
+	  drawOutlinedText(
+		`Gräs: ${grassCountCached}/${maxCells}`,
+		CANVAS_WIDTH - 8,
+		CANVAS_HEIGHT - 8,
+		"right",
+		"14px 'JetBrains Mono', 'Consolas', 'Courier New', monospace"
+	  );
+	}
 
     function draw() {
-      drawGrid();
-      for (const worm of worms) {
-        worm.draw();
-      }
-      drawScore();
-      drawGrassReadout();
-    }
+	  drawGrid();
+	  for (const worm of worms) {
+		worm.draw();
+	  }
+	  drawScore();
+	  drawScienceTimer();
+	  drawGrassReadout();
+	}
 
     function loop(timestamp) {
       if (lastTimestamp === null) lastTimestamp = timestamp;
@@ -1463,139 +1429,114 @@ this.postLockDivergence =
       if (!isPaused) {
         update(dt);
       }
+
       draw();
       requestAnimationFrame(loop);
     }
 
-    function resetGame() {
-      isPaused = true;
-      pauseBtn.textContent = "Starta ▶";
-
-      score = 0;
-      scoreTimeAccumulator = 0;
-      lastTimestamp = null;
-
-      mutationEnabled = false;
-      mutationRate = 0.01;
-      mutationEnabledCheckbox.checked = false;
-      mutationRateInput.value = "0.01";
-
-      foodRespawnRate = DEFAULT_FOOD_RESPAWN_RATE;
-      grassRegrowRateInput.value = String(DEFAULT_FOOD_RESPAWN_RATE);
-
-      scienceMode = false;
-hasScienceEverBeenEnabled = false;
-
-scienceModeBtn.classList.remove("active");   
-
-scienceModeBtn.textContent = "Forskningsläge";
-scienceSettingsBtn.disabled = true;
-sciencePanel.style.display = "none";
-
-      worms.length = 0;
-
-      initGrid();
-      grassCountCached = countGrassCells();
-
-      speciesMap.clear();
-      speciesCreationCounter = 0;
-      speciesNameCounter = 1;
-      renderSpeciesList();
-
-      currentGenome = [];
-      updatePreview();
-      speciesNameInput.value = "";
-    }
-
-    resetBtn.addEventListener("click", resetGame);
-
-    canvas.addEventListener("click", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      spawnWormAt(x, y);
-    });
-
-    const helpPanel = document.getElementById("helpPanel");
-    const closeHelpBtn = document.getElementById("closeHelpBtn");
-
     function toggleHelp() {
-      if (helpPanel.style.display === "none" || helpPanel.style.display === "") {
-        helpPanel.style.display = "block";
-      } else {
-        helpPanel.style.display = "none";
-      }
+      helpPanel.style.display =
+        (helpPanel.style.display === "none" || helpPanel.style.display === "")
+          ? "block"
+          : "none";
     }
 
-    closeHelpBtn.addEventListener("click", () => {
-      helpPanel.style.display = "none";
-    });
+	function setScienceMode(on) {
+	  scienceMode = on;
 
-    window.addEventListener("keydown", (e) => {
-      const active = document.activeElement;
-      const isTyping =
-        active &&
-        (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable);
+	  if (scienceMode) {
+		scienceModeBtn.classList.add("active");
+		hasScienceEverBeenEnabled = true;
+		score = 0;
+		scoreTimeAccumulator = 0;
 
-      if (!isTyping && e.key.toLowerCase() === "h") {
-        toggleHelp();
-      }
-      if (!isTyping && e.key === "Escape") {
-        sciencePanel.style.display = "none";
-      }
-    });
+		scienceSettingsBtn.disabled = false;
 
-    document.getElementById("helpBtn").addEventListener("click", () => {
-      toggleHelp();
-    });
+		grassCountCached = countGrassCells();
+		grassRefreshAccumulator = 0;
+		scienceElapsedTime = 0;
+	  } else {
+		scienceModeBtn.classList.remove("active");
+		scienceSettingsBtn.disabled = true;
+		sciencePanel.style.display = "none";
+	  }
+	}
+	
+	function drawScienceTimer() {
+	  if (!scienceMode) return;
 
-    function setScienceMode(on) {
-  scienceMode = on;
+	  const text = `${Math.floor(scienceElapsedTime)} s`;
 
-  if (scienceMode) {
+	  drawOutlinedText(
+		text,
+		8,
+		CANVAS_HEIGHT - 8,
+		"left",
+		"18px 'JetBrains Mono', 'Consolas', 'Courier New', monospace"
+	  );
+	}
 
-    scienceModeBtn.classList.add("active");
+    function resetGame() {
+	  const shouldReturnToScienceMode = scienceMode;
 
-    hasScienceEverBeenEnabled = true;
-    score = 0;
-    scoreTimeAccumulator = 0;
+	  isPaused = true;
+	  pauseBtn.textContent = "Starta ▶";
 
-    scienceSettingsBtn.disabled = false;
-    grassCountCached = countGrassCells();
+	  score = 0;
+	  scoreTimeAccumulator = 0;
+	  lastTimestamp = null;
 
-  } else {
+	  uiRefreshAccumulator = 0;
+	  grassRefreshAccumulator = 0;
+	  scienceElapsedTime = 0;
 
-    scienceModeBtn.classList.remove("active");
+	  mutationEnabled = false;
+	  mutationRate = 0.01;
+	  mutationEnabledCheckbox.checked = false;
+	  mutationRateInput.value = "0.01";
 
-    scienceSettingsBtn.disabled = true;
-    sciencePanel.style.display = "none";
-  }
-}
+	  foodRespawnRate = DEFAULT_FOOD_RESPAWN_RATE;
+	  grassRegrowRateInput.value = String(DEFAULT_FOOD_RESPAWN_RATE);
 
-    scienceModeBtn.addEventListener("click", () => {
-      setScienceMode(!scienceMode);
-    });
+	  worms.length = 0;
 
-    scienceSettingsBtn.addEventListener("click", () => {
-      if (!scienceMode) return;
-      sciencePanel.style.display = (sciencePanel.style.display === "none" || sciencePanel.style.display === "")
-        ? "block"
-        : "none";
-    });
+	  initGrid();
+	  grassCountCached = countGrassCells();
 
-    closeScienceBtn.addEventListener("click", () => {
-      sciencePanel.style.display = "none";
-    });
+	  speciesMap.clear();
+	  speciesCreationCounter = 0;
+	  speciesNameCounter = 1;
+	  renderSpeciesList();
+
+	  currentGenome = [];
+	  updatePreview();
+	  speciesNameInput.value = "";
+
+	  sciencePanel.style.display = "none";
+
+	  if (shouldReturnToScienceMode) {
+		scienceMode = true;
+		hasScienceEverBeenEnabled = true;
+		scienceModeBtn.classList.add("active");
+		scienceSettingsBtn.disabled = false;
+		grassRefreshAccumulator = 0;
+		grassCountCached = countGrassCells();
+	  } else {
+		scienceMode = false;
+		hasScienceEverBeenEnabled = false;
+		scienceModeBtn.classList.remove("active");
+		scienceSettingsBtn.disabled = true;
+	  }
+	}
 
     function init() {
       initGrid();
       grassCountCached = countGrassCells();
       grassRegrowRateInput.value = String(DEFAULT_FOOD_RESPAWN_RATE);
+      updatePreview();
       renderSpeciesList();
       requestAnimationFrame(loop);
     }
-
-    window.addEventListener("load", init);
   </script>
 </body>
 </html>
